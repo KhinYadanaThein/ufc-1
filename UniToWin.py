@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
+
 def replace(input):
     output = input
-    output = re.sub(u'((?:\u101f)?)\u1004\u103a\u1039(\u101e)', u'\\1\\2\u0046', output)  #
-    output = re.sub(u'\u100b\u1039\u100c', u'\u007c', output)
     output = output.replace(u'\u104f', u'\u005c')
     output = output.replace(u'\u1039\u1000', u'\u00fa')  # ka sint
     output = output.replace(u'\u1039\u1001', u'\u00a9')  # kha sint
@@ -66,7 +65,7 @@ def replace(input):
     output = re.sub(u'\u101f', u'\u005b', output)  # ha
     output = re.sub(u'\u1020', u'\u0056', output)  # la-gyi
     output = re.sub(u'\u1021', u'\u0074', output)  # la-gyi
-    output = output.replace(u'\u1008', u'\u0070\u0073')  # zms
+
     ############number
     output = re.sub(u'\u1040', u'\u0030', output)  # 0
     output = re.sub(u'\u1041', u'\u0031', output)  # 1
@@ -92,6 +91,8 @@ def replace(input):
     output = re.sub(u'\u1031', u'\u0061', output)  # tawai
     output = re.sub(u'\u1032', u'\u004a', output)  # naut-pyit
     output = re.sub(u'\u1036', u'\u0048', output)  # ttt
+    # output = re.sub(u'\u1037', u'\u0055', output)  #out-myit
+    # output = re.sub(u'\u1037', u'\u0059', output)  #out-myit
     output = re.sub(u'\u1037', u'\u0068', output)  # out-myit
     output = re.sub(u'\u1038', u'\u003b', output)  # witsapout
     output = re.sub(u'\u103A', u'\u0066', output)  # athat
@@ -122,7 +123,6 @@ def decompose(input):
     output = output.replace(u'\u103e\u103d', u'\u103d\u103e')  # swae-htoe
     output = output.replace(u'\u102f\u103e', u'\u103e\u102f')  # htoe-tachaung
     output = output.replace(u'\u103c\u103e', u'\u103e\u103c')  # yit-htoe
-    output = output.replace(u'\u0049\u0048', u'\u0048\u0049')  # ttt-tanachaung
     output = re.sub(u'\u103d\u103e', u'\u0054', output)  # swae-htoe
     output = re.sub(u'\u100d\u1039\u100e', u'\u00b9', output)
     output = re.sub(u'\u103e\u102f', u'\u0049', output)  # hote-tachaung
@@ -190,7 +190,7 @@ def shape(input):
     output = re.sub(u'([\u006c\u0047\u0054\u0053])\u0068', u'\\1\u0059', output)  #nachaung-swae-outmyit
     output = re.sub(u'(\u0064\u006b)\u0068', u'\\1\u0059', output)  # lone-tin-tachaung-outmyit
     output = re.sub(u'([\u00fa\u00a9\u00be\u00a2\u00f6\u00e4\u00c6\u00b3\u00b2\u00d6\u00c5\u00a6\u00b4\u00a8\u00ea\u00dc\u00e6\u00c1\u00c7\u00ae])\u0068', u'\\1\u0055', output)  # lone-tin-tachaung-outmyit
-    output = re.sub(u'(\u0048\u0049)\u0068', u'\\1\\u0055', output)  # ttt-ta-nachaung-outmyit
+    output = re.sub(u'(\u0049)(\u0048)\u0068', u'\\1\\2\u0055', output)  # tachung-outmyit
     output = re.sub(u'(\u0047)([\u004a\u0048])\u0068', u'\\1\\2\u0059', output)  # na-outmyit
     ###########nya
     output = re.sub(u'\u006e([\u0047\u0054])', u'\u00f1\\1', output)  # nga-tat-kha
@@ -223,7 +223,7 @@ def shape(input):
     output = re.sub(u'\u0046\u0064', u'\u00d8', output)  # lontin-ngatat
     output = re.sub(u'\u0046\u0048', u'\u00f8', output)  # ttt-ngatat
     output = re.sub(u'\u0046\u0044', u'\u00d0', output)  # sankat-ngatat
-    output = re.sub(u'\u0065\u0044', u'\u00d0', output)  # sankat-ngatat
+
     return output
 def convert(input):
     output = input
@@ -233,4 +233,3 @@ def convert(input):
     output = shape(output)
 
     return output
-

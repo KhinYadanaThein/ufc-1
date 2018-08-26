@@ -6,8 +6,8 @@ def replace(input):
     output = input
 
     output = output.replace(u'\u106A', u'\u1009')
+
     #  nyalay
-    
     output = output.replace(u'\u106B', u'\u100A')
     #  nya
 

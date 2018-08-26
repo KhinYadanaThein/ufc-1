@@ -2,7 +2,7 @@
 import re
 
 
-def replace(input):
+def convert(input):
     output = input
     output = output.replace(u'\u004F', u'\u1025')  # nya-lay
     output = output.replace(u'\u00CD', u'\u1009')  # nya-lay
@@ -21,6 +21,7 @@ def replace(input):
     output = output.replace(u'\u00F1', u'\u100A')  # nya
     output = output.replace(u'\u0023', u'\u100B')  # tatlin
     output = output.replace(u'\u0058', u'\u100C')  # hta-won-bae
+
     output = output.replace(u'\u0021', u'\u100D')  # da-yin-kaut
     output = output.replace(u'\u00A1', u'\u100E')  # da-yin-mote
     output = output.replace(u'\u0050', u'\u100F')  # na-gyi
@@ -68,7 +69,6 @@ def replace(input):
     output = output.replace(u'\u002F', u'\u104B')  # 2chaung-pote
 
     ###################
-
     output = output.replace(u'\u0024', u'\u1000\u103b\u1015\u103a')  # kyat_sign
 
     output = output.replace(u'\u0067', u'\u102B')  # yay-char
@@ -99,20 +99,21 @@ def replace(input):
     output = output.replace(u'\u00A7', u'\u103E')  # ha-htoe
     output = output.replace(u'\u0053', u'\u103E')  # ha-htoe
 
-    return output
-
-
-def decompose(input):
-    output = input
-
-    output = re.sub(u'([\u1000-\u1021])\u0046', u'\u0046\\1', output)  # up-ngathet
-    output = re.sub(u'([\u1000-\u1021])\u00d0', u'\u0046\\1\u102e', output)  # with-lgtsk
-    output = re.sub(u'([\u1000-\u1021])\u00d8', u'\u0046\\1\u102d', output)  # with-lonegyitin
-    output = re.sub(u'([\u1000-\u1021])\u00f8', u'\u0046\\1\u1036', output)  # with-ttt
-
     output = re.sub(u'\u0070\u0073', u'\u1008', output)  # za-myin-zwe
     output = re.sub(u'\u1005\u103b', u'\u1008', output)  # za-myin-zwe
+##########################
+    output = re.sub(u'([\u1000-\u1021])\u0046', u'\u0046\\1', output)  # up-ngathet
 
+    output = re.sub(u'([\u1000-\u1021])\u00d0', u'\u0046\\1\u102E', output)  # with-lgtsk
+    output = re.sub(u'([\u1000-\u1021])\u00d8', u'\u0046\\1\u102D', output)  # with-lonegyitin
+    output = re.sub(u'([\u1000-\u1021])\u00f8', u'\u0046\\1\u1036', output)  # with-ttt
+    output = re.sub(u'\u00f0', u'\u102d\u1036', output)
+    #output = re.sub(u'([\u1000-\u1021])\u0046\u006D', u'\u0046\\1\u006D', output)
+
+
+
+    output = re.sub(u'\u00F0', u'\u102D' + u'\u1036', output)
+    #  lgt-ttt
     output = re.sub(u'\u003A', u'\u102B' + u'\u103A', output)
     #  yaychar-htoe
     output = re.sub(u'\u0054', u'\u103D' + u'\u103E', output)
@@ -127,8 +128,7 @@ def decompose(input):
     # yapit-waswe
     output = re.sub(u'u0057', u'\u103B' + u'\u103D' + u'\u103E', output)
     # yapit-waswe-hahtoe
-    output = re.sub(u'\u00F0', u'\u102D' + u'\u1036', output)
-    #  lgt-ttt
+
     output = re.sub(u'\u00D8', u'\u1004' + u'\u103A' + u'\u1039' + u'\u102D', output)
     # ngathet-lgt
     output = re.sub(u'\u00D0', u'\u1004' + u'\u103A' + u'\u1039' + u'\u102E', output)
@@ -165,7 +165,7 @@ def decompose(input):
     # za-zwe
     output = re.sub(u'\u00B3', u'\u1039\u100B', output)
     # tatalin
-    output = re.sub(u'\u00D6', u'\u1039\u100F', output)
+    output = re.sub(u'\u0050', u'\u1039\u100F', output)
     # na-gyi
     output = re.sub(u'[\u00C5\u00E5]', u'\u1039\u1010', output)
     # ta
@@ -189,10 +189,12 @@ def decompose(input):
     # ma
     output = re.sub(u'\u2019', u'\u1039\u101C', output)
     # la
+
     output = re.sub(u'\u00B2', u'\u1039\u100C', output)
     # htawonbae
     output = output.replace(u'\u007C', u'\u100B\u1039\u100C')
     # htawon
+
 
     ###############
 
@@ -206,26 +208,14 @@ def decompose(input):
     output = re.sub(u'\u00D7', u'\u100D\u1039\u100D', output)
     # dayin-kaut
 
-    return output
-
-
-def visual2logical(input):
-    output = input
-
     output = re.sub(
         u'((?:\u1031)?)((?:\u103c)?)((?:\u0046)?)([\u1000-\u1021])((?:\u1039[\u1000-\u1021])?)((?:\u103b)?)((?:\u103d)?)((?:\u103e)?)((?:\u1037)?)((?:\u102c)?)',
         '\\3\\4\\5\\2\\6\\7\\8\\1\\9\\10', output)
+    #output = re.sub(u'\u00fb([\u1000-\u1021])', u'\\1\u103c\u102f', output)
+    #output = re.sub(u'\u00ea([\u1000-\u1021])', u'\\1\u103c\u102f', output)
     output = re.sub(u'\u0046', u'\u1004\u103A\u1039', output)
     # up-ngathet
 
-    return output
-
-
-def convert(input):
-    output = input
-
-    output = replace(output)
-    output = decompose(output)
-    output = visual2logical(output)
 
     return output
+

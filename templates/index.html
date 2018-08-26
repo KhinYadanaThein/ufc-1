@@ -25,6 +25,18 @@
           }
 
     </style>
+ <script>
+		$(document).ready(function()
+			{
+			$(".dropdown-toggle").dropdown();
+			});
+		 $(document).ready(function()
+			{
+			$('input#input_text, textarea#myinput,textarea#output').characterCounter();
+			});
+    </script>
+</head>
+
 
 <body>
 
@@ -33,9 +45,9 @@
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Choose Languages <span class="caret"></span></a>
-        <ul class="dropdown-menu">
+        <li class="active"><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home">Home</span></a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown1" href="#">Choose Languages <span class="caret"></span></a>
+        <ul id="dropdown1" class="dropdown-menu">
           <li><a href="{{ url_for('ztou') }}">ZawGyi to Uni</a></li>
           <li class="divider"></li>
           <li><a href="{{ url_for('ztow') }}">ZawGyi to Win</a></li>
@@ -51,10 +63,7 @@
       </li>
       
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ url_for('signup1') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="{{ url_for('signin1') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
+    
   </div>
 </nav>
   
@@ -89,19 +98,7 @@
 
         <!-- Grid column -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-          <p>
-            <a href="#!">MDBootstrap</a>
-          </p>
-          <p>
-            <a href="#!">MDWordPress</a>
-          </p>
-          <p>
-            <a href="#!">BrandFlow</a>
-          </p>
-          <p>
-            <a href="#!">Bootstrap Angular</a>
-          </p>
+          <a href="{{ url_for('about') }}"><h6 class="text-uppercase mb-4 font-weight-bold">About</h6></a>
         </div>
         <!-- Grid column -->
 
@@ -109,19 +106,7 @@
 
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-          <p>
-            <a href="#!">Your Account</a>
-          </p>
-          <p>
-            <a href="#!">Become an Affiliate</a>
-          </p>
-          <p>
-            <a href="#!">Shipping Rates</a>
-          </p>
-          <p>
-            <a href="#!">Help</a>
-          </p>
+          <a href="{{ url_for('work') }}"><h6 class="text-uppercase mb-4 font-weight-bold">How it work?</h6></a>
         </div>
 
         <!-- Grid column -->
